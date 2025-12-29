@@ -145,7 +145,8 @@ JAZZMIN_SETTINGS = {
     "site_header": "Admin",
     "site_brand": "Admin Panel",
 
-
+    "login_logo": "images/logo.png",
+    "site_logo": "images/logoS.png",
  
     "welcome_sign": "Welcome to the Admin Panel",
     "copyright": "Project Ltd",
