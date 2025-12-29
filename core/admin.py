@@ -122,18 +122,37 @@ class OccupationAdmin(admin.ModelAdmin):
 
 @admin.register(EmploymentType)
 class EmploymentTypeAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('first_translation_label','id',)
     inlines = [EmploymentTypeTranslationInline]
+
+
+    def first_translation_label(self, obj):
+        translation = obj.translations.first()
+        return translation.name if translation else '-'
+
+    first_translation_label.short_description = "Label"
 
 @admin.register(EducationLevel)
 class EducationLevelAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('first_translation_label','id',)
     inlines = [EducationLevelTranslationInline]
+
+    def first_translation_label(self, obj):
+        translation = obj.translations.first()
+        return translation.name if translation else '-'
+
+    first_translation_label.short_description = "Label"
 
 @admin.register(Level)
 class LevelAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('first_translation_label','id',)
     inlines = [LevelTranslationInline]
+
+    def first_translation_label(self, obj):
+        translation = obj.translations.first()
+        return translation.label if translation else '-'
+
+    first_translation_label.short_description = "Label"
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):

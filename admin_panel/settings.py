@@ -141,9 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Jazzmin Settings
 JAZZMIN_SETTINGS = {
-    "site_title": "Project Admin",
+    "site_title": "Octopus admin",
     "site_header": "Admin",
     "site_brand": "Admin Panel",
+
+
+ 
     "welcome_sign": "Welcome to the Admin Panel",
     "copyright": "Project Ltd",
     "search_model": ["core.User", "core.Company"],
@@ -156,11 +159,29 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
     "icons": {
-        "auth": "fas fa-users-cog",
         "core.User": "fas fa-user",
         "core.Company": "fas fa-building",
+        "core.Candidate": "fas fa-user-graduate",
+        "core.Moderator": "fas fa-user-shield",
         "core.JobPost": "fas fa-briefcase",
+        "core.JobApplication": "fas fa-file-alt",
+        "core.Boost": "fas fa-rocket",
+        "core.Industry": "fas fa-industry",
+        "core.IndustryTranslation": "fas fa-language",        # translation üçün generic icon
+        "core.Occupation": "fas fa-user-tie",
+        "core.OccupationTranslation": "fas fa-language",
+        "core.EmploymentType": "fas fa-clock",
+        "core.EmploymentTypeTranslation": "fas fa-language",
+        "core.EducationLevel": "fas fa-graduation-cap",
+        "core.EducationLevelTranslation": "fas fa-language",
+        "core.Level": "fas fa-layer-group",
+        "core.LevelTranslation": "fas fa-language",
+        "core.Skill": "fas fa-lightbulb",
+        "core.CandidateSkill": "fas fa-lightbulb",
+        "core.Language": "fas fa-language",
+        "core.CandidateLanguageLevel": "fas fa-language",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
 }
+JAZZMIN_SETTINGS["show_ui_builder"] = False
