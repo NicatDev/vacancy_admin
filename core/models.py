@@ -314,6 +314,9 @@ class Skill(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         managed = False
         db_table = 'skills'
@@ -340,6 +343,9 @@ class Language(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         managed = False
         db_table = 'languages'
@@ -359,3 +365,4 @@ class CandidateLanguageLevel(models.Model):
         managed = False
         db_table = 'candidate_language_level'
         unique_together = (('candidate', 'language'),)
+
