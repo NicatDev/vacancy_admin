@@ -307,7 +307,7 @@ class Boost(models.Model):
         db_table = 'boosts'
         verbose_name = 'Boost'
         verbose_name_plural = 'Boosts'
-
+import ast
 class PricingPlans(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -327,13 +327,18 @@ class PricingPlans(models.Model):
         db_table = 'pricing_plans'
 
     def save(self, *args, **kwargs):
+        # Əgər listdirsə → JSON string
         if isinstance(self.features, list):
-            # Python list → JSON string
             self.features = json.dumps(self.features)
         elif isinstance(self.features, str):
-            # Əgər tək dırnaqla gəlirsə onu JSON-ə uyğunlaşdır
-            if self.features.startswith("['") and self.features.endswith("']"):
-                self.features = json.dumps(eval(self.features))
+            try:
+                # Python literal eval istifadə edərək tək dırnaqla listi Python list-ə çeviririk
+                py_list = ast.literal_eval(self.features)
+                if isinstance(py_list, list):
+                    self.features = json.dumps(py_list)
+            except (ValueError, SyntaxError):
+                # Əgər parse mümkün deyilsə, heç nə etmə (DB-ə yazmadan əvvəl düzgün JSON olmalıdır)
+                pass
         super().save(*args, **kwargs)
 
     def get_features(self):
