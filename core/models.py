@@ -327,9 +327,13 @@ class PricingPlans(models.Model):
         db_table = 'pricing_plans'
 
     def save(self, *args, **kwargs):
-        # Əgər list verilirsə, JSON string-ə çevir
         if isinstance(self.features, list):
+            # Python list → JSON string
             self.features = json.dumps(self.features)
+        elif isinstance(self.features, str):
+            # Əgər tək dırnaqla gəlirsə onu JSON-ə uyğunlaşdır
+            if self.features.startswith("['") and self.features.endswith("']"):
+                self.features = json.dumps(eval(self.features))
         super().save(*args, **kwargs)
 
     def get_features(self):
