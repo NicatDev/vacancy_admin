@@ -314,7 +314,7 @@ class PricingPlans(models.Model):
     paypal_plan_id = models.CharField(unique=True, max_length=255)
     type = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    features = models.TextField()  # This field type is a guess.
+    features = models.JSONField(null=True,blank=True)  # This field type is a guess.
     max_post_limit = models.IntegerField(blank=True, null=True)
     duration_months = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
