@@ -8,8 +8,9 @@ from .models import (
     EducationLevel, EducationLevelTranslation,
     Level, LevelTranslation,
     Skill, CandidateSkill,
-    Language, CandidateLanguageLevel
+    Language, CandidateLanguageLevel, PricingPlans
 )
+admin.site.register(PricingPlans)
 
 # Inlines for Translations
 class IndustryTranslationInline(admin.TabularInline):
