@@ -307,6 +307,24 @@ class Boost(models.Model):
         verbose_name = 'Boost'
         verbose_name_plural = 'Boosts'
 
+class PricingPlans(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    slug = models.CharField(unique=True, max_length=255)
+    paypal_plan_id = models.CharField(unique=True, max_length=255)
+    type = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    features = models.TextField()  # This field type is a guess.
+    max_post_limit = models.IntegerField(blank=True, null=True)
+    duration_months = models.IntegerField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pricing_plans'
+
 class Skill(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=255)
