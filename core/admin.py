@@ -10,7 +10,12 @@ from .models import (
     Skill, CandidateSkill,
     Language, CandidateLanguageLevel, PricingPlans
 )
-admin.site.register(PricingPlans)
+@admin.register(PricingPlans)
+class PricingPlansAdmin(admin.ModelAdmin):
+    
+    # Disable adding new objects
+    def has_add_permission(self, request):
+        return False
 
 # Inlines for Translations
 class IndustryTranslationInline(admin.TabularInline):

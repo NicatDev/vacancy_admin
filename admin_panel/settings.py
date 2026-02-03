@@ -180,6 +180,7 @@ JAZZMIN_SETTINGS = {
         "core.Skill": "fas fa-lightbulb",
         "core.CandidateSkill": "fas fa-lightbulb",
         "core.Language": "fas fa-language",
+        "core.PricingPlans": "fas fa-tags",
         "core.CandidateLanguageLevel": "fas fa-language",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
