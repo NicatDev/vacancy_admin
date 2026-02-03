@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import json
 
 class JobStatus(models.TextChoices):
     DRAFT = 'draft', _('Draft')
@@ -314,7 +315,7 @@ class PricingPlans(models.Model):
     paypal_plan_id = models.CharField(unique=True, max_length=255)
     type = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    features = models.JSONField(null=True,blank=True)  # This field type is a guess.
+    features = models.TextField(null=True,blank=True)  # This field type is a guess.
     max_post_limit = models.IntegerField(blank=True, null=True)
     duration_months = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -324,6 +325,17 @@ class PricingPlans(models.Model):
     class Meta:
         managed = False
         db_table = 'pricing_plans'
+
+    def save(self, *args, **kwargs):
+        # Əgər list verilirsə, JSON string-ə çevir
+        if isinstance(self.features, list):
+            self.features = json.dumps(self.features)
+        super().save(*args, **kwargs)
+
+    def get_features(self):
+        if self.features:
+            return json.loads(self.features)
+        return []
 
 class Skill(models.Model):
     id = models.BigAutoField(primary_key=True)
