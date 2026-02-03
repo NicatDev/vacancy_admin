@@ -327,17 +327,18 @@ class PricingPlans(models.Model):
         db_table = 'pricing_plans'
 
     def save(self, *args, **kwargs):
-        # Əgər listdirsə → JSON string
         if isinstance(self.features, list):
+            # Python list → JSON string
             self.features = json.dumps(self.features)
         elif isinstance(self.features, str):
+            # tək dırnaq -> cüt dırnaq
             try:
-                # Python literal eval istifadə edərək tək dırnaqla listi Python list-ə çeviririk
+                # Python literal list → JSON string
+                import ast
                 py_list = ast.literal_eval(self.features)
-                if isinstance(py_list, list):
-                    self.features = json.dumps(py_list)
+                self.features = json.dumps(py_list)
             except (ValueError, SyntaxError):
-                # Əgər parse mümkün deyilsə, heç nə etmə (DB-ə yazmadan əvvəl düzgün JSON olmalıdır)
+                # Əgər parse mümkün deyil, burax
                 pass
         super().save(*args, **kwargs)
 
